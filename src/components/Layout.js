@@ -1,0 +1,1 @@
+// A higher-order component for defining the overall layout and structure of your application, including navigation bars, headers, footers, etc

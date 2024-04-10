@@ -1,0 +1,1 @@
+# If your application requires database integration, this file can define database models using an ORM (Object-Relational Mapping) tool like SQLAlchemy.

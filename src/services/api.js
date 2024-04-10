@@ -1,0 +1,1 @@
+// A service file for making HTTP requests to your backend API endpoints. This file can encapsulate functions for fetching stock data and sending user preferences to the backend.
