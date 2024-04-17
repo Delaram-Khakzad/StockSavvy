@@ -2,8 +2,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Stock from './components/StockDetails';
+import StockList from './components/StockList';
 import RecommendationList from './components/RecomendationList';
+import StockForm from './components/StockForm';
 
 // function App() {
 //   return (
@@ -28,37 +29,32 @@ import RecommendationList from './components/RecomendationList';
 
 
 function App() {
-    const [stockData, setStockData] = useState({});
     const [recommendations, setRecommendations] = useState([]);
+    const [stockNames, setStockNames] = useState([undefined, undefined]);
 
     useEffect(() => {
-        fetchStockData();
-        fetchRecommendations();
-    }, []);
-
-    const instance = axios.create({baseURL: 'http://127.0.0.1:5000'})
-
-    const fetchStockData = () => {
-        instance.get('/api/stock-data')
-            .then(response => setStockData(response.data))
-            .catch(error => console.error('Error fetching stock data:', error));
-    };
-
-    const fetchRecommendations = () => {
-        instance.get('/api/recommendations')
+        // load stock names and recommendations
+        axios.get('http://127.0.0.1:5000/api/all_stock_names')
+            .then(response => setStockNames(response.data))
+            .catch(error => console.error('Error fetching stock names:', error));
+        axios.get('http://127.0.0.1:5000/api/recommendations')
             .then(response => setRecommendations(response.data))
             .catch(error => console.error('Error fetching recommendations:', error));
-    };
+    }, []);
 
+
+    // iterate over all stock names and fetch data for each
     return (
         <div>
             <h1>Stock Recommendation System</h1>
-            <Stock 
-            stockData={stockData}/>
+            <h2>Stock Data</h2>
+            <StockList symbols={stockNames} />
+
             <div>
                 <h2>Recommended Stocks</h2>
-                <RecommendationList recommendations={recommendations}/>
+                <RecommendationList recommendations={recommendations} />
             </div>
+            <StockForm s />
         </div>
     );
 }
