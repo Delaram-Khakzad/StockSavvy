@@ -1,11 +1,10 @@
 import React from 'react';
 
-function Recommendations({ recommendations }) {
+function RecommendationList({ recommendations }) {
     return (
         <div>
-            <h2>Recommended Stocks</h2>
             <ul>
-                {recommendations.map((stock) => (
+                {recommendations.map(stock => (
                     <li key={stock.symbol}>{stock.name} - {stock.price}</li>
                 ))}
             </ul>
@@ -13,4 +12,4 @@ function Recommendations({ recommendations }) {
     );
 }
 
-export default Recommendations;
+export default RecommendationList;
