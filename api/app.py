@@ -1,8 +1,12 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+from sandp import SandP500
 
 app = Flask(__name__)
-CORS(app)
+
+DEBUG = True
+
+sp500 = SandP500()
 
 # dummy info
 stock_data = {
@@ -25,6 +29,10 @@ stock_data = {
 @app.route('/')
 def index():
     return 'Hello, World!'
+
+@app.route('/api/symbols')
+def get_symbols():
+    return jsonify(list(sp500.symbols()))
 
 @app.route('/api/stock/<symbol>')
 def get_stock(symbol):
@@ -50,4 +58,6 @@ def get_recommendations():
     return jsonify(recommendations)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    if DEBUG:
+        CORS(app)
+    app.run(debug=DEBUG)
