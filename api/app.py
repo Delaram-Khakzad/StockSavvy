@@ -32,7 +32,7 @@ def index():
 
 @app.route('/api/symbols')
 def get_symbols():
-    return jsonify(list(sp500.symbols()))
+    return jsonify(sp500.symbols())
 
 @app.route('/api/stock/<symbol>')
 def get_stock(symbol):
