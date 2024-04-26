@@ -17,9 +17,9 @@ function StockDetails({ symbol }) {
         <div>
             <p>Symbol: {stockData.symbol}</p>
             <p>Name: {stockData.name}</p>
-            <p>Price: {stockData.price}</p>
-            <p>Change: {stockData.change}</p>
-            <p>Percent Change: {stockData.percent_change}</p>
+            <p>Price: ${Number(stockData.price).toFixed(2)}</p>
+            <p>Change: ${Number(stockData.change).toFixed(2)}</p>
+            <p>Percent Change: {(stockData.percent_change*100).toFixed(2)}%</p>
         </div>
     );
 }

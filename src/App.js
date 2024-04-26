@@ -5,6 +5,7 @@ import axios from 'axios';
 import StockList from './components/StockList';
 import RecommendationList from './components/RecomendationList';
 import StockForm from './components/StockForm';
+import StockGraphForm from './components/StockGraphForm';
 
 // function App() {
 //   return (
@@ -34,7 +35,7 @@ function App() {
 
     useEffect(() => {
         // load stock names and recommendations
-        axios.get('http://127.0.0.1:5000/api/all_stock_names')
+        axios.get('http://127.0.0.1:5000/api/stocks')
             .then(response => setStockNames(response.data))
             .catch(error => console.error('Error fetching stock names:', error));
         axios.get('http://127.0.0.1:5000/api/recommendations')
@@ -54,7 +55,8 @@ function App() {
                 <h2>Recommended Stocks</h2>
                 <RecommendationList recommendations={recommendations} />
             </div>
-            <StockForm s />
+            {/* <StockForm s /> */}
+            <StockGraphForm />
         </div>
     );
 }

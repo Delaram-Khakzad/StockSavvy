@@ -1,19 +1,22 @@
+if __name__ == '__main__':
+    print("This app should be included in the main app.py file")
+    exit(1)
 
 from flask import Flask, request, jsonify
 import requests
 import re
 import openai
 
-app = Flask(__name__)
+from __main__ import app
 
 # Directly set your API keys here for demonstration (not recommended for production)
 NEWS_API_KEY = '705baf27dc3f461fbb61ab7e949db0df'
 OPENAI_API_KEY = '#sk-proj-72WC2N3leEulHSLrrdMdT3BlbkFJV9MqCKXALTeTqojjfma3'
 openai.api_key = OPENAI_API_KEY
 
-@app.route('/fetch_news', methods=['GET'])
-def fetch_news():
-    stock_name = request.args.get('stock_name')
+@app.route('/fetch_news/<symbol>', methods=['GET'])
+def fetch_news(symbol):
+    stock_name = symbol.upper()
     if not stock_name:
         return jsonify({'error': 'Stock name parameter is required'}), 400
 
@@ -60,5 +63,3 @@ def rerank_articles():
     scored_articles.sort(reverse=True, key=lambda x: x[0])
     return jsonify(scored_articles[:5])
 
-if __name__ == '__main__':
-    app.run(debug=True)
