@@ -30,7 +30,7 @@ import StockForm from './components/StockForm';
 
 function App() {
     const [recommendations, setRecommendations] = useState([]);
-    const [stockNames, setStockNames] = useState([undefined, undefined]);
+    const [stockNames, setStockNames] = useState([0,1]);
 
     useEffect(() => {
         // load stock names and recommendations

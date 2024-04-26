@@ -7,7 +7,7 @@ function StockDetails({ symbol }) {
     const [stockData, setStockData] = useState({'symbol': 'Loading...', 'name': 'Loading...', 'price': 'Loading...', 'change': 'Loading...', 'percent_change': 'Loading...'});
 
     useEffect(() => {
-        if (!symbol) return;
+        if (!(typeof symbol === 'string')) return;
         axios.get(`http://127.0.0.1:5000/api/stock/${symbol}`)
             .then(response => setStockData(response.data))
             .catch(error => console.error('Error fetching stock data:', error));

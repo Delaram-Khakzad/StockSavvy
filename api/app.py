@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 from sandp import SandP500
 
@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 DEBUG = True
 
-sp500 = SandP500()
+sp500 = SandP500('../datasets/sp500_companies.csv')
 
 # dummy info
 stock_data = {
@@ -26,9 +26,18 @@ stock_data = {
     }
 }
 
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
+
 @app.route('/')
 def index():
-    return 'Hello, World!'
+    # redirect the user to the same ip but on port 3000
+    domain = request.url_root
+    return redirect(domain.replace('5000', '3000'))
 
 @app.route('/api/symbols')
 def get_symbols():

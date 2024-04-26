@@ -1,8 +1,8 @@
 import pandas as pd
 
 class SandP500():
-    def __init__(self):
-        self.data = pd.read_csv('datasets/sp500_companies.csv')
+    def __init__(self, path='datasets/sp500_companies.csv'):
+        self.data = pd.read_csv(path)
         self.data.set_index('Symbol', inplace=True)
         
     def get_data(self):
