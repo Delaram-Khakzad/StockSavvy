@@ -5,6 +5,9 @@ import pandas as pd
 from datetime import datetime, timedelta
 import io
 
+import matplotlib
+matplotlib.use('agg')
+
 app = Flask(__name__)
 
 def download_data(stock_symbol):
