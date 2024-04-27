@@ -29,7 +29,7 @@ const HomePage = () => {
             <div className="input-container">
                 <div className="input-group">
                     <input type="text" placeholder="Enter stock symbol for specific information" onChange={(e) =>setStockSymbol(e.target.value)} onKeyDown={navigateToStockInfo}/>
-                    <Link to="/stock-info" state={stockSymbol}>
+                    <Link to="/stock-info" state={{stock: stockSymbol}}>
                         <button>Get Stock Info</button>
                     </Link>
                 </div>

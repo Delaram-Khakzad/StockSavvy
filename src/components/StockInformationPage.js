@@ -6,18 +6,21 @@ import '../styles/StockInformationPage.css'; // Import CSS file
 
 const StockInformationPage = () => {
     const location = useLocation();
-    var selectedStock = location.state.stock;
+    var selectedStock = location.state;
+    console.log(selectedStock);
 
     if (!selectedStock) {
         selectedStock = 'AAPL';
     }
 
+    selectedStock = selectedStock.toUpperCase();
+
     const [stockDescription, setStockDescription] = useState('Loading Stock Description...');
 
     useEffect(() => {
-        axios.get(`https://api.iextrading.com/1.0/stock/${selectedStock}/company`)
+        axios.get(`http://127.0.0.1:5000/api/stock/${selectedStock}/summary`)
         .then((response) => {
-            setStockDescription(response.data.description);
+            setStockDescription(response.data);
         })
         .catch((error) => {
             console.error('Error fetching stock description: ', error);
