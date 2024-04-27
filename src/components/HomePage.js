@@ -17,7 +17,7 @@ const HomePage = () => {
 
     const navigateToRecommendation = (e) => {
         if (e.key === 'Enter') {
-            navigate('/recommendation', { state: recommendation });
+            navigate('/recommendation', { state: {recommendation: recommendation} });
         }
     }
 
@@ -35,7 +35,7 @@ const HomePage = () => {
                 </div>
                 <div className="input-group">
                     <input type="text" placeholder="Enter criteria for stock recommendation" onChange={(e) =>setRecommendation(e.target.value)} onKeyDown={navigateToRecommendation}/>
-                    <Link to="/recommendation" state={recommendation}>
+                    <Link to="/recommendation" state={{recommendation: recommendation}}>
                         <button>Get Recommendation</button>
                     </Link>
                 </div>

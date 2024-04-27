@@ -6,7 +6,8 @@ import FilterOption from './FilterOption';
 
 const RecommendationPage = () => {
     const location = useLocation();
-    const previousUserInput = location.state;
+    const previousState = location.state;
+    const previousUserInput = previousState ? previousState.recommendation : '';
 
     const numFilters = 3;
     const filterOptions = ['option1', 'option2'];
