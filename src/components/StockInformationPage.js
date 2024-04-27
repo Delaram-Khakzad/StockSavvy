@@ -8,11 +8,12 @@ const StockInformationPage = () => {
     const location = useLocation();
     const prevState = location.state;
 
-    const selectedStock = prevState ? prevState.stock.toUpperCase() : 'AAPL';
+    const selectedStock = prevState && prevState.stock ? prevState.stock.toUpperCase() : 'AAPL';
 
     const [stockDescription, setStockDescription] = useState('Loading Stock Description...');
 
     useEffect(() => {
+        // Fetch stock description and graph data
         axios.get(`http://127.0.0.1:5000/api/stock/${selectedStock}/summary`)
         .then((response) => {
             setStockDescription(response.data);
@@ -41,7 +42,9 @@ const StockInformationPage = () => {
                 <a href="#">News Article 2</a>
                 <p>Short preview of the news article...</p> */}
                 {/* Add more news articles if needed */}
+                <img src={`http://127.0.0.1:5000/api/stock/${selectedStock}/graph`} alt="Stock Graph" />
             </div>
+            
         </div>
     );
 }

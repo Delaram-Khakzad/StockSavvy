@@ -1,24 +1,20 @@
 // HomePage.js
 import React, { useState } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import '../styles/HomePage.css'; // Import CSS file
 
 const HomePage = () => {
-    const [stockSymbol, setStockSymbol] = useState('');
-    const [recommendation, setRecommendation] = useState('');
+    const [stockSymbol, setStockSymbol] = useState();
+    const [recommendation, setRecommendation] = useState();
 
     const navigate = useNavigate();
 
-    const navigateToStockInfo = (e) => {
-        if (e.key === 'Enter') {
-            navigate('/stock-info', { state: {stock: stockSymbol} });
-        }
+    const navigateToStockInfo = () => {
+        navigate('/stock-info', { state: {stock: stockSymbol} });
     };
 
-    const navigateToRecommendation = (e) => {
-        if (e.key === 'Enter') {
-            navigate('/recommendation', { state: {recommendation: recommendation} });
-        }
+    const navigateToRecommendation = () => {
+        navigate('/recommendation', { state: {recommendation: recommendation} });
     }
 
     return (
@@ -28,16 +24,12 @@ const HomePage = () => {
             </div>
             <div className="input-container">
                 <div className="input-group">
-                    <input type="text" placeholder="Enter stock symbol for specific information" onChange={(e) =>setStockSymbol(e.target.value)} onKeyDown={navigateToStockInfo}/>
-                    <Link to="/stock-info" state={{stock: stockSymbol}}>
-                        <button>Get Stock Info</button>
-                    </Link>
+                    <input type="text" placeholder="Enter stock symbol for specific information" onChange={(e) =>setStockSymbol(e.target.value)} onKeyDown={(e) => {if (e.key === 'Enter') navigateToStockInfo()}}/>
+                    <button onClick={navigateToStockInfo}>Get Stock Info</button>
                 </div>
                 <div className="input-group">
-                    <input type="text" placeholder="Enter criteria for stock recommendation" onChange={(e) =>setRecommendation(e.target.value)} onKeyDown={navigateToRecommendation}/>
-                    <Link to="/recommendation" state={{recommendation: recommendation}}>
-                        <button>Get Recommendation</button>
-                    </Link>
+                    <input type="text" placeholder="Enter criteria for stock recommendation" onChange={(e) =>setRecommendation(e.target.value)} onKeyDown={(e) => {if (e.key === 'Enter') navigateToRecommendation()}}/>
+                    <button onClick={navigateToRecommendation}>Get Recommendation</button>
                 </div>
             </div>
             <div className="trending-stocks">

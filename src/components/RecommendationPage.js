@@ -7,9 +7,9 @@ import FilterOption from './FilterOption';
 const RecommendationPage = () => {
     const location = useLocation();
     const previousState = location.state;
-    const previousUserInput = previousState ? previousState.recommendation : '';
+    const previousUserInput = previousState && previousState.recommendation ? previousState.recommendation : '';
 
-    const numFilters = 3;
+    const numFilters = 1;
     const filterOptions = ['option1', 'option2'];
     const filterRefs = useRef(Array(numFilters).fill().map(() => React.createRef()));
     

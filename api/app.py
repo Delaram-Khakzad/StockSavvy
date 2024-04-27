@@ -6,6 +6,7 @@ import time
 app = Flask(__name__)
 
 import stock_info
+import stock_graph
 
 DEBUG = True
 
@@ -28,6 +29,7 @@ def index():
 app.add_url_rule('/api/stocks', view_func=stock_info.get_symbols)
 app.add_url_rule('/api/stock/<symbol>', view_func=stock_info.get_stock)
 app.add_url_rule('/api/stock/<symbol>/summary', view_func=stock_info.summary)
+app.add_url_rule('/api/stock/<symbol>/graph', view_func=stock_graph.plot_stock_price)
 
 
 # @app.route('/api/recommendations')
@@ -40,6 +42,8 @@ app.add_url_rule('/api/stock/<symbol>/summary', view_func=stock_info.summary)
 #     return jsonify(recommendations)
 
 if __name__ == '__main__':
+    app.config['ENV'] = 'development'
+    app.config['DEBUG'] = DEBUG
     if DEBUG:
         CORS(app)
     app.run(debug=DEBUG)
