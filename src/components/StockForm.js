@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function StockForm({ onSubmit }) {
-    const [symbol, setSymbol] = useState('');
+    const [symbol, setSymbol] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
