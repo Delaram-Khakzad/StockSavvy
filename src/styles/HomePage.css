@@ -8,11 +8,27 @@
 }
 
 .hero {
-    /* background-image: url('path/to/your/image.jpg'); */
+    margin-top: 50px;
     background-color: black;
     background-size: cover;
     background-position: center;
-    height: 500px;
+    height: 100px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.stockName {
+    /* background-image: url('path/to/your/image.jpg'); */
+    margin-top: 10px;
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    height: 40px;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,13 +37,14 @@
 }
 
 .input-container {
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 .input-group {
-    width: 30%;
+    margin-bottom: 5px;
+    width: 70%;
 }
 
 .input-group input {
@@ -38,12 +55,13 @@
 }
 
 .input-group button {
-    background-color: #007bff;
+    background-color: #0056b3;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 2px;
 }
 
 .input-group button:hover {

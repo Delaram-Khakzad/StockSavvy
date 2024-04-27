@@ -1,12 +1,33 @@
 // StockInformationPage.js
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/StockInformationPage.css'; // Import CSS file
 
 const StockInformationPage = () => {
+    const location = useLocation();
+    const prevState = location.state;
+
+    const selectedStock = prevState && prevState.stock ? prevState.stock.toUpperCase() : 'AAPL';
+
+    const [stockDescription, setStockDescription] = useState('Loading Stock Description...');
+
+    useEffect(() => {
+        // Fetch stock description and graph data
+        axios.get(`http://127.0.0.1:5000/api/stock/${selectedStock}/summary`)
+        .then((response) => {
+            setStockDescription(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching stock description: ', error);
+        });
+    },[selectedStock]);
+
+
     return (
         <div className="container">
-            <h1 className="stock-name">Stock Name</h1>
-            <p className="description">Stock description goes here...</p>
+            <h1 className="stock-name">{selectedStock}</h1>
+            <p className="description">{stockDescription}</p>
             <div className="graph">
                 {/* Graph component goes here... */}
             </div>
@@ -15,13 +36,15 @@ const StockInformationPage = () => {
             </div>
             <p className="description">Additional description goes here...</p>
             <div className="news-links">
-                <h2>Related News</h2>
+                {/* <h2>Related News</h2>
                 <a href="#">News Article 1</a>
                 <p>Short preview of the news article...</p>
                 <a href="#">News Article 2</a>
-                <p>Short preview of the news article...</p>
+                <p>Short preview of the news article...</p> */}
                 {/* Add more news articles if needed */}
+                <img src={`http://127.0.0.1:5000/api/stock/${selectedStock}/graph`} alt="Stock Graph" />
             </div>
+            
         </div>
     );
 }

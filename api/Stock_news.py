@@ -1,3 +1,7 @@
+if __name__ == '__main__':
+    print("This app should be included in the main app.py file")
+    exit(1)
+
 from flask import Flask, request, jsonify
 import requests
 import re
