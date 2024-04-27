@@ -11,7 +11,7 @@ const HomePage = () => {
 
     const navigateToStockInfo = (e) => {
         if (e.key === 'Enter') {
-            navigate('/stock-info', { state: stockSymbol });
+            navigate('/stock-info', { state: {stock: stockSymbol} });
         }
     };
 

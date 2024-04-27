@@ -11,7 +11,6 @@ const RecommendationPage = () => {
     const numFilters = 3;
     const filterOptions = ['option1', 'option2'];
     const filterRefs = useRef(Array(numFilters).fill().map(() => React.createRef()));
-    console.log(filterRefs);
     
 
     const [userInput, setUserInput] = useState(previousUserInput || '');
@@ -33,7 +32,6 @@ const RecommendationPage = () => {
             <div className="result">
                 {/* Space to show resulting text */}
             </div>
-            <button onClick={() => console.log(filterRefs)}>Log Refs</button>
         </div>
     );
 }

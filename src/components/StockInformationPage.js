@@ -6,14 +6,9 @@ import '../styles/StockInformationPage.css'; // Import CSS file
 
 const StockInformationPage = () => {
     const location = useLocation();
-    var selectedStock = location.state;
-    console.log(selectedStock);
+    const prevState = location.state;
 
-    if (!selectedStock) {
-        selectedStock = 'AAPL';
-    }
-
-    selectedStock = selectedStock.toUpperCase();
+    const selectedStock = prevState ? prevState.stock.toUpperCase() : 'AAPL';
 
     const [stockDescription, setStockDescription] = useState('Loading Stock Description...');
 
@@ -25,7 +20,7 @@ const StockInformationPage = () => {
         .catch((error) => {
             console.error('Error fetching stock description: ', error);
         });
-    });
+    },[selectedStock]);
 
 
     return (
