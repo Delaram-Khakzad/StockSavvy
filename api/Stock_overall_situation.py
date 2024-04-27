@@ -9,7 +9,7 @@ import openai
 from __main__ import app
 
 # Hardcoding the OpenAI API key (not recommended for production)
-openai.api_key = '#sk-proj-72WC2N3leEulHSLrrdMdT3BlbkFJV9MqCKXALTeTqojjfma3'
+openai.api_key = 'sk-proj-2SsYcZ67svKuBHqIA3dgT3BlbkFJUjVGIv1CUVe7owKOzXAd'
 
 @app.route('/summarize_recommendations/<symbol>', methods=['GET'])
 def summarize_recommendations(symbol):

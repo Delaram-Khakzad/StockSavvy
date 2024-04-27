@@ -11,7 +11,7 @@ from __main__ import app
 
 # Directly set your API keys here for demonstration (not recommended for production)
 NEWS_API_KEY = '705baf27dc3f461fbb61ab7e949db0df'
-OPENAI_API_KEY = '#sk-proj-72WC2N3leEulHSLrrdMdT3BlbkFJV9MqCKXALTeTqojjfma3'
+OPENAI_API_KEY = 'sk-proj-2SsYcZ67svKuBHqIA3dgT3BlbkFJUjVGIv1CUVe7owKOzXAd'
 openai.api_key = OPENAI_API_KEY
 
 @app.route('/fetch_news/<symbol>', methods=['GET'])
