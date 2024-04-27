@@ -1,11 +1,21 @@
-// HomePage.js
-import React from 'react';
-import { Link } from 'react-router-dom'; // test 
-import '../styles/HomePage.css'; // Import CSS file
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const HomePage = () => {
+    const [trendingStocks, setTrendingStocks] = useState([]);
+        
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:5000/api/trending_stocks')
+            .then(response => setTrendingStocks(response.data))
+            .catch(error => {
+                alert('Failed to fetch stock data');  // Simple error handling
+            });
+    }, []);
+
     return (
-        <div className="container"> 
+        <div className="container">
             <div className="hero">
                 <h1>Welcome to Stock Savvy</h1>
             </div>
@@ -24,22 +34,21 @@ const HomePage = () => {
                 </div>
             </div>
             <div className="trending-stocks">
-                {/* Display trending stock information */}
-                <div className="trending-stock">
-                    <h3>Trending Stock 1</h3>
-                    <p>Stock information goes here...</p>
+                <div className="trendingstocknames">
+                {trendingStocks.map((trendingStock)=> (
+                    
+                    <div className="trendingstocknames">
+                    <h3>{trendingStock}</h3>
+                    </div>    
+                
+                )
+                
+            )}
                 </div>
-                <div className="trending-stock">
-                    <h3>Trending Stock 2</h3>
-                    <p>Stock information goes here...</p>
-                </div>
-                <div className="trending-stock">
-                    <h3>Trending Stock 3</h3>
-                    <p>Stock information goes here...</p>
-                </div>
+                {/* Additional stocks can be rendered similarly */}
             </div>
         </div>
     );
-}
+};
 
 export default HomePage;
