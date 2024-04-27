@@ -16,6 +16,9 @@ class Market():
     
     def get_industry_names(self):
         return [industry.short_name for industry in self.industries]
+    
+    def get_industry_long_names(self):
+        return [industry.long_name for industry in self.industries]
 
     def get_industry_by_id(self, id):
         for industry in self.industries:
