@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/RecommendationPage.css';
 
 function RecommendationList({ recommendations }) {
     return (

@@ -1,0 +1,46 @@
+/* StockInformationPage.css */
+
+.container {
+    /* max-width: 800px; */
+    background-color: rgb(164, 162, 172);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.stock-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.graph {
+    margin-bottom: 20px;
+}
+
+.figure {
+    margin-bottom: 20px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.news-links {
+    margin-bottom: 20px;
+}
+
+.news-link {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.news-link:hover {
+    text-decoration: underline;
+}
