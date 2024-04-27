@@ -15,11 +15,11 @@ const StockInformationPage = () => {
             </div>
             <p className="description">Additional description goes here...</p>
             <div className="news-links">
-                <h2>Related News</h2>
+                {/* <h2>Related News</h2>
                 <a href="#">News Article 1</a>
                 <p>Short preview of the news article...</p>
                 <a href="#">News Article 2</a>
-                <p>Short preview of the news article...</p>
+                <p>Short preview of the news article...</p> */}
                 {/* Add more news articles if needed */}
             </div>
         </div>
