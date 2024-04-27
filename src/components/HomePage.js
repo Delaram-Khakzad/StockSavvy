@@ -1,11 +1,11 @@
 // HomePage.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // test 
 import '../styles/HomePage.css'; // Import CSS file
 
 const HomePage = () => {
     return (
-        <div className="container">
+        <div className="container"> 
             <div className="hero">
                 <h1>Welcome to Stock Savvy</h1>
             </div>
