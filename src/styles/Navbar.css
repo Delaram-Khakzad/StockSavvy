@@ -1,0 +1,31 @@
+/* Navbar.css */
+nav {
+    background-color: #2362a5; /* Blue background color */
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+li {
+    margin-right: 20px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #65696d; /* Darker blue on hover */
+}
+
+.active {
+    color: black; /* White color for active link */
+}
