@@ -1,15 +1,19 @@
+if __name__ == '__main__':
+    print("This app should be included in the main app.py file")
+    exit(1)
+
 from flask import Flask, request, jsonify
 import yfinance as yf
 import openai
 
-app = Flask(__name__)
+from __main__ import app
 
 # Hardcoding the OpenAI API key (not recommended for production)
 openai.api_key = 'sk-proj-2SsYcZ67svKuBHqIA3dgT3BlbkFJUjVGIv1CUVe7owKOzXAd'
 
-@app.route('/summarize_recommendations', methods=['GET'])
-def summarize_recommendations():
-    ticker = request.args.get('ticker')
+@app.route('/summarize_recommendations/<symbol>', methods=['GET'])
+def summarize_recommendations(symbol):
+    ticker = symbol.upper()
     if not ticker:
         return jsonify({'error': 'Ticker parameter is required'}), 400
 
@@ -33,6 +37,3 @@ def summarize_recommendations():
 
     # Return the summarized response
     return jsonify({'summary': response.choices[0].text.strip()})
-
-if __name__ == '__main__':
-    app.run(debug=True)

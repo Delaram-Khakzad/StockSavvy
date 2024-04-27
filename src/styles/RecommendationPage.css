@@ -1,0 +1,53 @@
+/* RecommendationPage.css */
+
+.container {
+    /* max-width: 800px; */
+    background-color: rgb(164, 162, 172);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    margin-bottom: 10px;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.filter-group select {
+    width: 20%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-text {
+    margin-bottom: 20px;
+}
+
+.input-text label {
+    display: block;
+    font-weight: bold;
+}
+
+.input-text textarea {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.result {
+    width: 60%;
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
