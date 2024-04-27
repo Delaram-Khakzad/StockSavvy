@@ -6,8 +6,8 @@ import '../styles/RecommendationPage.css'; // Import CSS file
 const RecommendationPage = () => {
     return (
         <div className="container">
-            <h1>Recommendation Page</h1>
             <div className="filters">
+                <h1>Recommendation Page</h1>
                 {/* Place holders for filters */}
                 <div className="filter-group">
                     <label>Filter 1</label>
