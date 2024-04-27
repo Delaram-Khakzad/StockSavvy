@@ -1,14 +1,25 @@
 // RecommendationPage.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 import '../styles/RecommendationPage.css'; // Import CSS file
 import {Drawer, useMediaQuery, useTheme, Paper, Avatar, Typography, Stack, AppBar, Toolbar, styled, Button, Grid, ToggleButton, ToggleButtonGroup, CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 
 const RecommendationPage = () => {
+    const location = useLocation();
+    const previousState = location.state;
+    const previousUserInput = previousState && previousState.recommendation ? previousState.recommendation : '';
+
+    const numFilters = 1;
+    const filterOptions = ['option1', 'option2'];
+    const filterRefs = useRef(Array(numFilters).fill().map(() => React.createRef()));
+    
+
+    const [userInput, setUserInput] = useState(previousUserInput || '');
+
     return (
         <div className="container">
+            <h1 >Recommendation Page</h1>
             <div className="filters">
                 <h1>Recommendations</h1>
                 {/* Place holders for filters */}

@@ -1,12 +1,25 @@
 // HomePage.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import '../styles/HomePage.css'; // Import CSS file
 import {Drawer, useMediaQuery, useTheme, Paper, Avatar, Typography, Stack, AppBar, Toolbar, styled, Button, Grid, ToggleButton, ToggleButtonGroup, CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 
 const HomePage = () => {
+    const [stockSymbol, setStockSymbol] = useState();
+    const [recommendation, setRecommendation] = useState();
+
+    const navigate = useNavigate();
+
+    const navigateToStockInfo = () => {
+        navigate('/stock-info', { state: {stock: stockSymbol} });
+    };
+
+    const navigateToRecommendation = () => {
+        navigate('/recommendation', { state: {recommendation: recommendation} });
+    }
+
     return (
         <div className="container">
             <Grid container spacing={1}>
