@@ -24,3 +24,5 @@ yarn-error.log*
 
 # pythin venv
 venv/
+
+get-pip.py
