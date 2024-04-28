@@ -29,10 +29,9 @@ const HomePage = () => {
     }
 
     const rotateStock = (override) => {
-        console.log('Rotating stock');
         const nextStock = trendingStocks[override];
         setDisplayStock(nextStock);
-        setTimeout(rotateStock, 5000, (override + 1) % trendingStocks.length);
+        setTimeout(rotateStock, 7500, (override + 1) % trendingStocks.length);
     };
 
     const [trendingStocks, setTrendingStocks] = useState([]);
