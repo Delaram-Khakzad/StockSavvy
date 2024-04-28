@@ -38,7 +38,7 @@ def fetch_and_rerank_news(stock):
     scored_articles = []
     for title, url in articles_list:
         try:
-            prompt = f"On a scale of 0 to 10, rate the relevance of the following news article title to the concept of '{stock} being stuck': {title}"
+            prompt = f"Please rate the relevance of the following news article title on a scale from 0 to 10 regarding its pertinence to the stock of '{stock}'. Begin by considering the following step: If the title is not in English, assign a score of 0. Article Title: {title}"
             response = openai.Completion.create(
                 model="gpt-3.5-turbo-instruct",
                 prompt=prompt,
