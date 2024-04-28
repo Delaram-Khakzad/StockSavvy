@@ -1,6 +1,6 @@
 /* Navbar.css */
 nav {
-    background-color: #2362a5; /* Blue background color */
+    background-color: #0f2337; /* Blue background color */
     padding: 15px;
     position: fixed;
     width: 100%;
@@ -26,9 +26,11 @@ a {
 
 a:hover {
     color: #65696d; /* Darker blue on hover */
+    background-color: white;
 }
 
 .active {
-    color: black; /* White color for active link */
+    color: #1d446c; /* White color for active link */
+    background-color: white;
 }
 
