@@ -12,8 +12,8 @@ const HomePage = () => {
 
     const navigate = useNavigate();
 
-    const navigateToStockInfo = () => {
-        navigate('/stock-info', { state: {stock: stockSymbol} });
+    const navigateToStockInfo = (override) => {
+        navigate('/stock-info', { state: {stock: override ? override : stockSymbol} });
     };
 
     const navigateToRecommendation = () => {
@@ -21,15 +21,14 @@ const HomePage = () => {
     }
 
     const [trendingStocks, setTrendingStocks] = useState([]);
-        
 
     useEffect(() => {
         axios.get('http://127.0.0.1:5000/api/trending_stocks')
             .then(response => setTrendingStocks(response.data))
             .catch(error => {
-                alert('Failed to fetch stock data');  // Simple error handling
+                console.log('Failed to fetch stock data', error);  // Simple error handling
             });
-    }, []);
+    });
 
     return (
         <div className="container">
@@ -51,7 +50,7 @@ const HomePage = () => {
                     <Grid item xs={12} sx={{padding: 0}}>
                         <div className="input-container">
                             <div className="input-group">
-                                <input type="text" placeholder="Enter stock symbol for information" />
+                                <input type="text" placeholder="Enter stock symbol for information" onChange={(e) => setStockSymbol(e.target.value)} onKeyDown={(e) => {if (e.key === 'Enter') navigateToStockInfo()}}/>
                                 <button onClick={navigateToStockInfo}>Get Stock Information</button>
                             </div>
                         </div>
@@ -59,7 +58,18 @@ const HomePage = () => {
                 </Grid>
                 <Grid item xs={4} sx={{padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <div className="input-group">
-                        <div className="stockName">
+                         {trendingStocks.map((stock) => {
+                            return (<div key={stock}>
+                                <div className="stockName">
+                                    <Typography variant="h5" fontWeight='bold' align="center">
+                                        {stock}
+                                    </Typography>
+                                </div>
+                                <button onClick={() => navigateToStockInfo(stock)}>Get Stock Information</button>
+                                </div>
+                            );
+                        })}
+                        {/* <div className="stockName">
                             <Typography variant="h5" fontWeight='bold' align="center">
                                 Name 1
                             </Typography>
@@ -76,7 +86,7 @@ const HomePage = () => {
                             Name 3
                         </Typography>
                         </div>
-                        <button onClick={navigateToStockInfo}>Get Stock Information</button>
+                        <button onClick={navigateToStockInfo}>Get Stock Information</button> */}
                     </div>
                 </Grid>
                 <Grid item xs={6} sx={{padding: 0}}>

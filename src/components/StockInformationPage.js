@@ -11,6 +11,7 @@ const StockInformationPage = () => {
     const selectedStock = prevState && prevState.stock ? prevState.stock.toUpperCase() : 'AAPL';
 
     const [stockDescription, setStockDescription] = useState('Loading Stock Description...');
+    const [stockAIRecommendation, setStockAIRecommendation] = useState('Loading Stock AI Recommendation...');
 
     useEffect(() => {
         // Fetch stock description and graph data
@@ -19,7 +20,18 @@ const StockInformationPage = () => {
             setStockDescription(response.data);
         })
         .catch((error) => {
+            // remove the description and show error message
+            document.querySelector('.description').style.display = 'none';
+            // setStockDescription('Failed to fetch general stock description');
             console.error('Error fetching stock description: ', error);
+        });
+
+        axios.get(`http://127.0.0.1:5000/api/summarize_recomendations/${selectedStock}`)
+        .then((response) => {
+            setStockAIRecommendation(response.data.summary);
+        }).catch((error) => {
+            setStockAIRecommendation('Failed to fetch stock recommendation');
+            console.error('Error fetching stock recommendation: ', error);
         });
     },[selectedStock]);
 
@@ -34,7 +46,7 @@ const StockInformationPage = () => {
             <div className="figure">
                 {/* Figure component goes here... */}
             </div>
-            <p className="description">Additional description goes here...</p>
+            <p className="description">{stockAIRecommendation}</p>
             <div className="news-links">
                 {/* <h2>Related News</h2>
                 <a href="#">News Article 1</a>

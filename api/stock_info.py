@@ -51,6 +51,9 @@ def get_stock(symbol):
     return jsonify(data)
 
 def summary(symbol):
-    return jsonify(sp500.get_data().loc[symbol]['Longbusinesssummary'])
+    try:
+        return jsonify(sp500.get_data().loc[symbol]['Longbusinesssummary'])
+    except KeyError:
+        return jsonify({'error': 'Unknown stock symbol'}), 400
 
 

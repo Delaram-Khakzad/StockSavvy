@@ -9,12 +9,17 @@ app = Flask(__name__)
 
 import stock_info
 import stock_graph
+import Stock_overall_situation
 
 DEBUG = True
 
 # allow CORS
 @app.after_request
 def after_request(response):
+  # prevent duplicated headers
+  if 'Access-Control-Allow-Origin' in response.headers:
+    return response
+
   response.headers.add('Access-Control-Allow-Origin', '*')
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
@@ -32,6 +37,7 @@ app.add_url_rule('/api/stocks', view_func=stock_info.get_symbols)
 app.add_url_rule('/api/stock/<symbol>', view_func=stock_info.get_stock)
 app.add_url_rule('/api/stock/<symbol>/summary', view_func=stock_info.summary)
 app.add_url_rule('/api/stock/<symbol>/graph', view_func=stock_graph.plot_stock_price)
+app.add_url_rule('/api/summarize_recomendations/<symbol>', view_func=Stock_overall_situation.summarize_recommendations)
 
 
 # @app.route('/api/recommendations')
@@ -64,5 +70,6 @@ if __name__ == '__main__':
     app.config['ENV'] = 'development'
     app.config['DEBUG'] = DEBUG
     if DEBUG:
-        CORS(app)
+        pass
+        # CORS(app)
     app.run(debug=DEBUG)
