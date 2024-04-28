@@ -2,11 +2,15 @@
 import React, { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import '../styles/HomePage.css'; // Import CSS file
-import {Drawer, useMediaQuery, useTheme, Paper, Avatar, Typography, Stack, AppBar, Toolbar, styled, Button, Grid, ToggleButton, ToggleButtonGroup, CircularProgress } from '@mui/material';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
+import {Typography, Grid} from '@mui/material';
+import {IconButton } from '@mui/material';
+import { DescriptionOutlined } from '@mui/icons-material';  
+import PersonIcon from '@mui/icons-material/Person';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 
 const HomePage = () => {
+
     const [stockSymbol, setStockSymbol] = useState();
     const [recommendation, setRecommendation] = useState();
 
@@ -74,31 +78,33 @@ const HomePage = () => {
                         <p>Stock information goes here...</p>
                     </div>
                 </Grid>
-                <Grid item xs={6} sx={{padding: 0}}>
+                <Grid item xs={6} sx={{padding: 0, marginBottom:4}}>
                 <div className="trending-stock">
                         <h3>Trending Stock Graph</h3>
                         <p>Stock information goes here...</p>
                     </div>
                 </Grid>
-                <Grid item xs={3} sx={{padding: 0}}>
-                    <Typography variant="subtitle1" fontWeight='bold' align="center">
-                        Project info
-                    </Typography>
-                </Grid>
-                <Grid item xs={3} sx={{padding: 0}}>
-                    <Typography variant="subtitle1" fontWeight='bold' align="center">
-                        Developers info
-                    </Typography>
-                </Grid>
-                <Grid item xs={3} sx={{padding: 0}}>
-                    <Typography variant="subtitle1" fontWeight='bold' align="center">
-                        documentations
-                    </Typography>
-                </Grid>
-                <Grid item xs={3} sx={{padding: 0}}>
-                    <Typography variant="subtitle1" fontWeight='bold' align="center">
-                        repo link
-                    </Typography>
+                <Grid container spacing={2} justifyContent="center" alignItems="center">
+                    <Grid item sx={{padding: 0}}>
+                        <IconButton href='https://docs.google.com/document/d/1bLdFkhQTkY7gMkD5biFm1TxyMGv5jjKnrl88iXLnOY4/edit?usp=sharing' target="_blank">
+                            <ShowChartIcon fontSize="large" />
+                        </IconButton>
+                    </Grid>
+                    <Grid item sx={{padding: 0}}>
+                        <IconButton href='https://docs.google.com/document/d/1aV_1qDn5Q3rzd-ZJHfdxnv5sqz8tqS9n4nzHz_b7cGM/edit?usp=sharing' target="_blank">
+                            <PersonIcon fontSize="large" />
+                        </IconButton>
+                    </Grid>
+                    <Grid item sx={{padding: 0}}>
+                        <IconButton href='https://docs.google.com/document/d/1wAMFviuqRRDDYTjzpginnD6cF1P4LFU8AFwqCc3QT0Y/edit?usp=sharing' target="_blank">
+                            <DescriptionOutlined fontSize="large" />
+                        </IconButton>
+                    </Grid>
+                    <Grid item sx={{padding: 0}}>
+                        <IconButton href="https://github.com/Delaram-Khakzad/StockSavvy" target="_blank">
+                            <GitHubIcon fontSize="large" />
+                        </IconButton>
+                    </Grid>
                 </Grid>
             </Grid>
         </div>
