@@ -68,13 +68,6 @@
     background-color: #0056b3;
 }
 
-.trending-stocks {
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-}
-
 .trending-stock {
     background-color: #f8f9fa;
     border-radius: 5px;
