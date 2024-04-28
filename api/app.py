@@ -41,11 +41,18 @@ def stock_news(symbol):
         return jsonify({'error': str(e)}), 400
     
 def get_multiple_recommendations(index, count):
+    tries = 100
     index = int(index)
     count = int(count)
     recommendations = []
     while count > 0:
-        recommendations.append(recommendation.get_random_ticker_from_industry(index))
+        new_recommendation = recommendation.get_random_ticker_from_industry(index)
+        if new_recommendation in recommendations:
+            tries -= 1
+            if tries == 0:
+                break
+            continue
+        recommendations.append(new_recommendation)
         count -= 1
     return jsonify(recommendations)
 
