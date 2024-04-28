@@ -32,12 +32,20 @@ def index():
     domain = request.url_root
     return redirect(domain.replace('5000', '3000'))
 
+def stock_news(symbol):
+    try:
+        news = fetch_and_rerank_news(symbol)  
+        return jsonify(news)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 
 app.add_url_rule('/api/stocks', view_func=stock_info.get_symbols)
 app.add_url_rule('/api/stock/<symbol>', view_func=stock_info.get_stock)
 app.add_url_rule('/api/stock/<symbol>/summary', view_func=stock_info.summary)
 app.add_url_rule('/api/stock/<symbol>/graph', view_func=stock_graph.plot_stock_price)
 app.add_url_rule('/api/summarize_recomendations/<symbol>', view_func=Stock_overall_situation.summarize_recommendations)
+app.add_url_rule('/api/stock/<symbol>/news', view_func=stock_news)
 
 
 # @app.route('/api/recommendations')
@@ -58,12 +66,7 @@ def top_trending_stocks():
         return 'error', 400
     
 
-def stock_news():
-    try:
-        news = fetch_and_rerank_news()  
-        return jsonify(news)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
+
 
 
 if __name__ == '__main__':

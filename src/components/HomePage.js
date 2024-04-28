@@ -10,7 +10,9 @@ const HomePage = () => {
     const [stockSymbol, setStockSymbol] = useState();
     const [recommendation, setRecommendation] = useState();
 
-    const [displayStock, setDisplayStock] = useState('AAPL');;
+    const [displayStock, setDisplayStock] = useState('AAPL');
+
+    const [newsArticles, setNewsArticles] = useState([]); // Array of news articles {score, title, url}
 
     const navigate = useNavigate();
 
@@ -45,6 +47,15 @@ const HomePage = () => {
         if (trendingStocks.length > 0)
             rotateStock(0);
     },[trendingStocks]);
+
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:5000//api/stock/${displayStock}/news`)
+        .then(response => {
+            setNewsArticles(response.data);
+        }).catch(error => {
+            console.log('Failed to fetch news articles', error);
+        });
+    },[displayStock]);
 
     return (
         <div className="container">
@@ -108,7 +119,16 @@ const HomePage = () => {
                 <Grid item xs={6} sx={{ padding: 0 }}>
                     <div className="trending-stock">
                         <h3>Trending Stock News</h3>
-                        <p>Stock information goes here...</p>
+                        <div className="news-container">
+                            {newsArticles.map((article) => {
+                                return (
+                                    <div key={article.url}>
+                                        <a href={article.url} target={'_blank'}>{article.title} </a>
+                                        {/* <p>{article.score}</p> */}
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 </Grid>
                 <Grid item xs={6} sx={{ padding: 0 }}>
