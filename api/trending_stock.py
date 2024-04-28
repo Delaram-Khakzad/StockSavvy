@@ -2,8 +2,6 @@ from flask import Flask, jsonify
 import requests
 from bs4 import BeautifulSoup
 
-app = Flask(__name__)
-
 def get_top_trending_stocks():
     url = 'https://finance.yahoo.com/most-active'
     response = requests.get(url)
@@ -18,13 +16,4 @@ def get_top_trending_stocks():
     
     return top_stocks
 
-@app.route('/top-trending-stocks')
-def top_trending_stocks():
-    try:
-        stocks = get_top_trending_stocks()
-        return jsonify({'status': 'success', 'data': stocks})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)})
 
-if __name__ == '__main__':
-    app.run(debug=True)
