@@ -4,8 +4,24 @@ import '../styles/RecommendationPage.css'; // Import CSS file
 import {Drawer, useMediaQuery, useTheme, Paper, Avatar, Typography, Stack, AppBar, Toolbar, styled, Button, Grid, ToggleButton, ToggleButtonGroup, CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import {useNavigate} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
+
 
 const RecommendationPage = () => {
+    const [stockSymbol, setStockSymbol] = useState();
+const [recommendation, setRecommendation] = useState();
+
+const navigate = useNavigate();
+
+const navigateToStockInfo = () => {
+    navigate('/stock-info', { state: {stock: stockSymbol} });
+};
+
+const navigateToRecommendation = () => {
+    navigate('/recommendation', { state: {recommendation: recommendation} });
+}
+
     const location = useLocation();
     const previousState = location.state;
     const previousUserInput = previousState && previousState.recommendation ? previousState.recommendation : '';
@@ -19,7 +35,6 @@ const RecommendationPage = () => {
 
     return (
         <div className="container">
-            <h1 >Recommendation Page</h1>
             <div className="filters">
                 <h1>Recommendations</h1>
                 {/* Place holders for filters */}
@@ -31,20 +46,6 @@ const RecommendationPage = () => {
                         <option value="option2"> 3 </option>
                     </select>
                 </div>
-                {/* <div className="filter-group">
-                    <label>Filter 2</label>
-                    <select>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                    </select>
-                </div>
-                <div className="filter-group">
-                    <label>Filter 3</label>
-                    <select>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                    </select>
-                </div> */}
             </div>
             <div className="input-text">
                 <label>Enter criteria for recommendation</label>
@@ -59,19 +60,13 @@ const RecommendationPage = () => {
             <div className="result">
                 {/* Space to show resulting text */}
                 <div> 
-                    <Link to="/stock-info">
-                        <button>Recommendation # 1</button>
-                    </Link>
+                    <button onClick={navigateToStockInfo}>Recommendation # 1</button>
                 </div>
                 <div> 
-                    <Link to="/stock-info">
-                        <button>Recommendation # 2</button>
-                    </Link>
+                    <button onClick={navigateToStockInfo}>Recommendation # 2</button>
                 </div>
                 <div> 
-                    <Link to="/stock-info">
-                        <button>Recommendation # 3</button>
-                    </Link>
+                    <button onClick={navigateToStockInfo}>Recommendation # 3</button>
                 </div>
             </div>
         </div>

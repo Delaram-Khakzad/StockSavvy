@@ -32,10 +32,8 @@ const HomePage = () => {
                     <Grid item xs={12} sx={{padding: 0}}>
                         <div className="input-container">
                             <div className="input-group">
-                                <input type="text" placeholder="Enter criteria for recommendation" />
-                                <Link to="/recommendation">
-                                    <button>Get Recommendation</button>
-                                </Link>
+                                <input type="text" placeholder="Enter criteria for recommendation" onChange={(e) => setRecommendation(e.target.value)} onKeyDown={(e) => {if (e.key === 'Enter') navigateToRecommendation()}}/>
+                                <button onClick={navigateToRecommendation}>Get Recommendation</button>
                             </div>
                         </div>
                     </Grid>
@@ -43,9 +41,7 @@ const HomePage = () => {
                         <div className="input-container">
                             <div className="input-group">
                                 <input type="text" placeholder="Enter stock symbol for information" />
-                                <Link to="/stock-info">
-                                    <button>Get Stock Information</button>
-                                </Link>
+                                <button onClick={navigateToStockInfo}>Get Stock Information</button>
                             </div>
                         </div>
                     </Grid>
@@ -57,25 +53,19 @@ const HomePage = () => {
                                 Name 1
                             </Typography>
                         </div>
-                        <Link to="/stock-info">
-                            <button>Get Info</button>
-                        </Link>
-                        <Link to="/stock-info">
-                            <div className="stockName">
-                                <Typography variant="h5" fontWeight='bold' align="center">
-                                    Name 2
-                                </Typography>
-                            </div>
-                            <button>Get Info</button>
-                        </Link>
-                        <Link to="/stock-info">
-                            <div className="stockName">
+                        <button onClick={navigateToStockInfo}>Get Stock Information</button>
+                        <div className="stockName">
                             <Typography variant="h5" fontWeight='bold' align="center">
-                                Name 3
+                                Name 2
                             </Typography>
-                            </div>
-                            <button>Get Info</button>
-                        </Link>
+                        </div>
+                        <button onClick={navigateToStockInfo}>Get Stock Information</button>
+                        <div className="stockName">
+                        <Typography variant="h5" fontWeight='bold' align="center">
+                            Name 3
+                        </Typography>
+                        </div>
+                        <button onClick={navigateToStockInfo}>Get Stock Information</button>
                     </div>
                 </Grid>
                 <Grid item xs={6} sx={{padding: 0}}>
