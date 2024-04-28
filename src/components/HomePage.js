@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import '../styles/HomePage.css';
 import {Drawer, useMediaQuery, useTheme, Paper, Avatar, Typography, Stack, AppBar, Toolbar, styled, Button, Grid, ToggleButton, ToggleButtonGroup, CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';

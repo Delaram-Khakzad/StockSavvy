@@ -59,21 +59,6 @@ def stock_news():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-@app.route('/api/trending_stocks')
-def top_trending_stocks():
-    try:
-        stocks = get_top_trending_stocks()
-        return jsonify(stocks)
-    except Exception as e:
-        return 'error', 400
-    
-
-def stock_news():
-    try:
-        news = fetch_and_rerank_news()  
-        return jsonify(news)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
     app.config['ENV'] = 'development'
