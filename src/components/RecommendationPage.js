@@ -6,25 +6,34 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
+const industries = ['Food', 'Mining and Minerals', 'Oil and Petroleum Products', 'Textiles, Apparel & Footwear', 'Consumer Durables', 'Chemicals', 'Drugs, Soap, Perfumes, Tobacco', 'Construction', 'Steel', 'Fabricated Products', 'Machinery', 'Automobiles', 'Transportation', 'Utilities', 'Retail', 'Financial Services', 'Other'];
 
 const RecommendationPage = () => {
-    const [stockSymbol, setStockSymbol] = useState();
 
     const navigate = useNavigate();
 
-    const navigateToStockInfo = () => {
-        navigate('/stock-info', { state: { stock: stockSymbol } });
+    const navigateToStockInfo = (stock) => {
+        navigate('/stock-info', { state: { stock: stock } });
     };
 
     const location = useLocation();
     const previousState = location.state;
     const previousUserInput = previousState && previousState.recommendation ? previousState.recommendation : '';
 
-    const numFilters = 1;
-    const filterOptions = ['option1', 'option2'];
-    const filterRefs = useRef(Array(numFilters).fill().map(() => React.createRef()));
+    const [recommendations, setRecommendations] = useState([]);
 
+    const navigateToRecommendation = () => {
+        const sector = document.querySelector('select').value;
+        const idx = industries.indexOf(sector);
+        axios.get(`http://127.0.0.1:5000/api/recommendations/${idx}/3`)
+        .then(response => {
+            setRecommendations(response.data);
+        }).catch(error => {
+            console.error('Failed to fetch recommendation', error);
+        });
+    }
 
     const [userInput, setUserInput] = useState(previousUserInput || '');
 
@@ -35,10 +44,10 @@ const RecommendationPage = () => {
                 {/* Place holders for filters */}
                 <div className="filter-group">
                     <label>Choose Sector(s)</label>
-                    <select>
-                        <option value="option1"> 1 </option>
-                        <option value="option2"> 2 </option>
-                        <option value="option2"> 3 </option>
+                    <select label='industrySelector'>
+                        {industries.map((industry, index) => (
+                            <option key={index} value={industry}>{industry}</option>
+                        ))}
                     </select>
                 </div>
             </div>
@@ -47,22 +56,23 @@ const RecommendationPage = () => {
                 <textarea rows="4" placeholder="Your text here ..." defaultValue={userInput}></textarea>
             </div>
             <div>
-                <Button variant="contained" sx={{ fontSize: '16px', fontWeight: 'bold', backgroundColor: '#2362a5', color: '#fff', padding: '10px 20px', borderRadius: '5px', '&:hover': { backgroundColor: '#0056b3' } }}>
+                <Button variant="contained" sx={{ fontSize: '16px', fontWeight: 'bold', backgroundColor: '#2362a5', color: '#fff', padding: '10px 20px', borderRadius: '5px', '&:hover': { backgroundColor: '#0056b3' } }} onClick={navigateToRecommendation}>
                     Get Recommendations
                 </Button>
             </div>
             <Divider />
             <div className="result">
-                {/* Space to show resulting text */}
-                <div>
-                    <button onClick={navigateToStockInfo}>Recommendation # 1</button>
-                </div>
-                <div>
-                    <button onClick={navigateToStockInfo}>Recommendation # 2</button>
-                </div>
-                <div>
-                    <button onClick={navigateToStockInfo}>Recommendation # 3</button>
-                </div>
+                <h2>Recommendations</h2>
+                {recommendations.map((recommendation) => (
+                    <div className="recommendation" key={recommendation.symbol}>
+                        <h3>{recommendation.symbol}</h3>
+                        <p>{recommendation.name}</p>
+                        <Button variant="contained" sx={{ fontSize: '16px', fontWeight: 'bold', backgroundColor: '#2362a5', color: '#fff', padding: '10px 20px', borderRadius: '5px', '&:hover': { backgroundColor: '#0056b3' } }} onClick={() => navigateToStockInfo(recommendation.symbol)}>
+                            View Stock Information
+                        </Button>
+                    </div>)
+                    )
+                }
             </div>
         </div>
     );

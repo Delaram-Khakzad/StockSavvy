@@ -35,7 +35,7 @@ for industries in [industries[i:i+5] for i in range(0, len(industries), 5)]:
         d[industry] = int(cat)
         json.dump(d, open('datasets/cats.json', 'w'))
 
-exit()
+# for industry in industries:
 for long_name in m.get_industry_long_names():
-    print(long_name, end=', ')
+    print(f"'{long_name}'", end=', ')
 

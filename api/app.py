@@ -10,6 +10,7 @@ app = Flask(__name__)
 import stock_info
 import stock_graph
 import Stock_overall_situation
+import recommendation
 
 DEBUG = True
 
@@ -38,6 +39,15 @@ def stock_news(symbol):
         return jsonify(news)
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+    
+def get_multiple_recommendations(index, count):
+    index = int(index)
+    count = int(count)
+    recommendations = []
+    while count > 0:
+        recommendations.append(recommendation.get_random_ticker_from_industry(index))
+        count -= 1
+    return jsonify(recommendations)
 
 
 app.add_url_rule('/api/stocks', view_func=stock_info.get_symbols)
@@ -46,6 +56,8 @@ app.add_url_rule('/api/stock/<symbol>/summary', view_func=stock_info.summary)
 app.add_url_rule('/api/stock/<symbol>/graph', view_func=stock_graph.plot_stock_price)
 app.add_url_rule('/api/summarize_recomendations/<symbol>', view_func=Stock_overall_situation.summarize_recommendations)
 app.add_url_rule('/api/stock/<symbol>/news', view_func=stock_news)
+app.add_url_rule('/api/recommendations/<index>', view_func=recommendation.get_random_ticker_from_industry)
+app.add_url_rule('/api/recommendations/<index>/<count>', view_func=get_multiple_recommendations)
 
 
 # @app.route('/api/recommendations')
