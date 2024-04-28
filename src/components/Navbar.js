@@ -8,13 +8,13 @@ const Navbar = () => {
         <nav>
             <ul>
                 <li>
-                    <NavLink exact to="/" activeClassName="active">Home</NavLink>
+                    <NavLink to="/" >Home</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/recommendation" activeClassName="active">Recommendation</NavLink>
+                    <NavLink to="/recommendation" >Recommendation</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/stock-info" activeClassName="active">Stock Information</NavLink>
+                    <NavLink to="/stock-info" >Stock Information</NavLink>
                 </li>
             </ul>
         </nav>

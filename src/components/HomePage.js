@@ -137,7 +137,7 @@ const HomePage = () => {
                 <Grid item xs={6} sx={{padding: 0, marginBottom:4}}>
                 <div className="trending-stock">
                         <h3>Trending Stock Graph</h3>
-                        <div class="img_container">
+                        <div className="img_container">
                             <img src={`http://127.0.0.1:5000/api/stock/${displayStock}/graph`} alt="Stock Graph" />
                         </div>
 
