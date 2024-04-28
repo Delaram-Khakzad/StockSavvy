@@ -8,7 +8,7 @@ const StockInformationPage = () => {
     const location = useLocation();
     const prevState = location.state;
 
-    const selectedStock = prevState && prevState.stock ? prevState.stock.toUpperCase() : 'AAPL';
+    const selectedStock = prevState && prevState.stock ? prevState.stock.toUpperCase() : 'CAV.AX';
 
     const [stockDescription, setStockDescription] = useState('Loading Stock Description...');
     const [stockAIRecommendation, setStockAIRecommendation] = useState('Loading Stock AI Recommendation...');

@@ -90,3 +90,9 @@
     font-size: 14px;
     color: #666;
 }
+
+.img_container img {
+    height: 100%;
+    width: 100%;
+  }
+  
