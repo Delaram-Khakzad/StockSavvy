@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/HomePage.css';
-import { Typography, Grid} from '@mui/material';
+import {Grid, Button} from '@mui/material';
 import {IconButton } from '@mui/material';
 import { DescriptionOutlined } from '@mui/icons-material';  
 import PersonIcon from '@mui/icons-material/Person';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 const HomePage = () => {
 
@@ -63,62 +64,53 @@ const HomePage = () => {
 
     return (
         <div className="container">
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid item xs={8} sx={{ padding: 0 }}>
                     <Grid item xs={12} sx={{ padding: 0 }}>
                         <div className="hero">
                             <h1>Welcome to Stock Savvy</h1>
                         </div>
                     </Grid>
-                    <Grid item xs={12} sx={{ padding: 0 }}>
-                        <div className="input-container">
-                            <div className="input-group">
-                                <input type="text" placeholder="Enter criteria for recommendation" onChange={(e) => setRecommendation(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') navigateToRecommendation() }} />
-                                <button onClick={navigateToRecommendation}>Get Recommendation</button>
+                    <Grid container sx={{ padding: 0 }}>
+                        <Grid item xs={5} sx={{ padding: 0 }}>
+                            <div className="input-container">
+                                <div className="input-group">
+                                    <input type="text" placeholder="Enter criteria for recommendation" onChange={(e) => setRecommendation(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') navigateToRecommendation() }} />
+                                    <button onClick={navigateToRecommendation}>Get Recommendation</button>
+                                </div>
                             </div>
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} sx={{ padding: 0 }}>
-                        <div className="input-container">
-                            <div className="input-group">
-                                <input type="text" placeholder="Enter stock symbol for information" onChange={(e) => setStockSymbol(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') navigateToStockInfo() }} />
-                                <button onClick={navigateToStockInfo}>Get Stock Information</button>
+                        </Grid>
+                        <Grid item xs={5} sx={{ padding: 0 }}>
+                            <div className="input-container">
+                                <div className="input-group">
+                                    <input type="text" placeholder="Enter stock symbol for information" onChange={(e) => setStockSymbol(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') navigateToStockInfo() }} />
+                                    <button onClick={navigateToStockInfo}>Get Stock Information</button>
+                                </div>
                             </div>
-                        </div>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={4} sx={{ padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <div className="input-group">
-                        {trendingStocks.map((stock) => {
-                            return (<div key={stock}>
-                                <div className="stockName">
-                                    <Typography variant="h5" fontWeight='bold' align="center">
-                                        {stock}
-                                    </Typography>
+                
+                <Grid item xs={3} sx={{alignContent: 'center', marginTop: 5, padding: '5px'}}>
+                    <Grid container justifyContent="center" alignItems="center">
+                        <h1>Trending Stocks</h1>
+                        <div>
+                            {trendingStocks.map((stock) => {
+                                return (<div key={stock}>
+                                    <Button onClick={() => navigateToStockInfo(stock)} startIcon={<ShowChartIcon/>} variant="text"
+                                        sx={{
+                                            fontSize: '30px',  
+                                            fontWeight: stock === displayStock ? 'bold' : 'normal',
+                                            color: stock === displayStock ? 'white' : '#0f2337',
+                                            backgroundColor: stock === displayStock ? '#0f2337' : 'rgb(164, 162, 172)',
+                                            '&:hover': {backgroundColor: '#0f2337', color: 'white'}}}
+                                    >{stock}
+                                    </Button>
                                 </div>
-                                <button onClick={() => navigateToStockInfo(stock)}>Get Stock Information</button>
-                            </div>
-                            );
-                        })}
-                        {/* <div className="stockName">
-                            <Typography variant="h5" fontWeight='bold' align="center">
-                                Name 1
-                            </Typography>
+                                );
+                            })}
                         </div>
-                        <button onClick={navigateToStockInfo}>Get Stock Information</button>
-                        <div className="stockName">
-                            <Typography variant="h5" fontWeight='bold' align="center">
-                                Name 2
-                            </Typography>
-                        </div>
-                        <button onClick={navigateToStockInfo}>Get Stock Information</button>
-                        <div className="stockName">
-                        <Typography variant="h5" fontWeight='bold' align="center">
-                            Name 3
-                        </Typography>
-                        </div>
-                        <button onClick={navigateToStockInfo}>Get Stock Information</button> */}
-                    </div>
+                    </Grid>
                 </Grid>
                 <Grid item xs={6} sx={{ padding: 0 }}>
                     <div className="trending-stock">
@@ -126,7 +118,8 @@ const HomePage = () => {
                         <div className="news-container">
                             {newsArticles.map((article) => {
                                 return (
-                                    <div key={article.url}>
+                                    <div key={article.url} style={{ marginBottom: '10px' }}>
+                                        <NewspaperIcon style={{ marginRight: '5px' }} />
                                         <a href={article.url} target={'_blank'}>{article.title} </a>
                                         {/* <p>{article.score}</p> */}
                                     </div>
