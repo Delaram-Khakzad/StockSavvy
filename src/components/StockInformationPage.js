@@ -15,7 +15,7 @@ const StockInformationPage = () => {
 
     useEffect(() => {
         // Fetch stock description and graph data
-        axios.get(`http://127.0.0.1:5000/api/stock/${selectedStock}/summary`)
+        axios.get(`https://stocksavvy.calebweb.me:8123/api/stock/${selectedStock}/summary`)
         .then((response) => {
             setStockDescription(response.data);
         })
@@ -26,7 +26,7 @@ const StockInformationPage = () => {
             console.error('Error fetching stock description: ', error);
         });
 
-        axios.get(`http://127.0.0.1:5000/api/summarize_recomendations/${selectedStock}`)
+        axios.get(`https://stocksavvy.calebweb.me:8123/api/summarize_recomendations/${selectedStock}`)
         .then((response) => {
             setStockAIRecommendation(response.data.summary);
         }).catch((error) => {
@@ -54,7 +54,7 @@ const StockInformationPage = () => {
                 <a href="#">News Article 2</a>
                 <p>Short preview of the news article...</p> */}
                 {/* Add more news articles if needed */}
-                <img src={`http://127.0.0.1:5000/api/stock/${selectedStock}/graph`} alt="Stock Graph" />
+                <img src={`https://stocksavvy.calebweb.me:8123/api/stock/${selectedStock}/graph`} alt="Stock Graph" />
             </div>
             
         </div>

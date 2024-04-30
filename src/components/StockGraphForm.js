@@ -20,7 +20,7 @@ function StockGraphForm() {
     }
 
     return (
-        <form action="http://127.0.0.1:5000/plot" method="post">
+        <form action="https://stocksavvy.calebweb.me:8123/plot" method="post">
             <label for="stock_symbol">Enter Stock Symbol:</label>
             <input type="text" id="stock_symbol" name="stock_symbol" required></input>
 

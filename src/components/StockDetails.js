@@ -8,7 +8,7 @@ function StockDetails({ symbol }) {
 
     useEffect(() => {
         if (!(typeof symbol === 'string')) return;
-        axios.get(`http://127.0.0.1:5000/api/stock/${symbol}`)
+        axios.get(`https://stocksavvy.calebweb.me:8123/api/stock/${symbol}`)
             .then(response => setStockData(response.data))
             .catch(error => console.error('Error fetching stock data:', error));
     },[symbol]);
