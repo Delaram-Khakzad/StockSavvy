@@ -41,6 +41,7 @@ const HomePage = () => {
         axios.get('http://127.0.0.1:5000/api/trending_stocks')
             .then(response => {
                 setTrendingStocks(response.data);
+                setDisplayStock(response.data[0]);
             })
             .catch(error => {
                 console.log('Failed to fetch stock data', error);  // Simple error handling
