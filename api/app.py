@@ -46,19 +46,19 @@ def get_multiple_recommendations(index, count):
     # extract user input
     body = request.get_json()
     user_text = body.get('text', '').upper()
-    tries = 100
     index = int(index)
     count = int(count)
     recommendations = []
+    retrieved = 0
     while count > 0:
-        new_recommendation = recommendation.get_random_ticker_from_industry(index, user_text, nonce=tries)
-        if new_recommendation in recommendations:
-            tries -= 1
-            if tries == 0:
-                break
+        new_recommendation = recommendation.get_random_ticker_from_industry(index, user_text, retrieved)
+        if new_recommendation['symbol'] in user_text:
+            retrieved += 1
             continue
         recommendations.append(new_recommendation)
         count -= 1
+        retrieved += 1
+
     return jsonify(recommendations)
 
 
