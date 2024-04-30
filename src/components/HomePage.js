@@ -38,7 +38,7 @@ const HomePage = () => {
     const [trendingStocks, setTrendingStocks] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/trending_stocks')
+        axios.get('https://stocksavvy.calebweb.me:8123/api/trending_stocks')
             .then(response => {
                 setTrendingStocks(response.data);
                 setDisplayStock(response.data[0]);
@@ -54,7 +54,7 @@ const HomePage = () => {
     },[trendingStocks]);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5000/api/stock/${displayStock}/news`)
+        axios.get(`https://stocksavvy.calebweb.me:8123/api/stock/${displayStock}/news`)
         .then(response => {
             setNewsArticles(response.data);
         }).catch(error => {
@@ -132,7 +132,7 @@ const HomePage = () => {
                 <div className="trending-stock">
                         <h3>Trending Stock Graph</h3>
                         <div className="img_container">
-                            <img src={`http://127.0.0.1:5000/api/stock/${displayStock}/graph`} alt="Stock Graph" />
+                            <img src={`https://stocksavvy.calebweb.me:8123/api/stock/${displayStock}/graph`} alt="Stock Graph" />
                         </div>
 
 

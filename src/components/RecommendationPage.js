@@ -28,7 +28,7 @@ const RecommendationPage = () => {
     const navigateToRecommendation = () => {
         const sector = document.querySelector('select').value;
         const idx = industries.indexOf(sector);
-        axios.post(`http://127.0.0.1:5000/api/recommendations/${idx}/3`, { text: userInput })
+        axios.post(`https://stocksavvy.calebweb.me:8123/api/recommendations/${idx}/3`, { text: userInput })
         .then(response => {
             setRecommendations(response.data);
         }).catch(error => {
