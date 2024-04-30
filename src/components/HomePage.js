@@ -84,7 +84,7 @@ const HomePage = () => {
                             <div className="input-container">
                                 <div className="input-group">
                                     <input type="text" placeholder="Enter stock symbol for information" onChange={(e) => setStockSymbol(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') navigateToStockInfo() }} />
-                                    <button onClick={navigateToStockInfo}>Get Stock Information</button>
+                                    <button onClick={() => navigateToStockInfo(stockSymbol)}>Get Stock Information</button>
                                 </div>
                             </div>
                         </Grid>
