@@ -14,6 +14,8 @@ import recommendation
 
 DEBUG = True
 
+sp500 = SandP500()
+
 # allow CORS
 @app.after_request
 def after_request(response):
@@ -41,12 +43,15 @@ def stock_news(symbol):
         return jsonify({'error': str(e)}), 400
     
 def get_multiple_recommendations(index, count):
+    # extract user input
+    body = request.get_json()
+    user_text = body.get('text', '').upper()
     tries = 100
     index = int(index)
     count = int(count)
     recommendations = []
     while count > 0:
-        new_recommendation = recommendation.get_random_ticker_from_industry(index)
+        new_recommendation = recommendation.get_random_ticker_from_industry(index, user_text, nonce=tries)
         if new_recommendation in recommendations:
             tries -= 1
             if tries == 0:
@@ -64,7 +69,7 @@ app.add_url_rule('/api/stock/<symbol>/graph', view_func=stock_graph.plot_stock_p
 app.add_url_rule('/api/summarize_recomendations/<symbol>', view_func=Stock_overall_situation.summarize_recommendations)
 app.add_url_rule('/api/stock/<symbol>/news', view_func=stock_news)
 app.add_url_rule('/api/recommendations/<index>', view_func=recommendation.get_random_ticker_from_industry)
-app.add_url_rule('/api/recommendations/<index>/<count>', view_func=get_multiple_recommendations)
+app.add_url_rule('/api/recommendations/<index>/<count>', view_func=get_multiple_recommendations, methods=['POST'])
 
 
 # @app.route('/api/recommendations')

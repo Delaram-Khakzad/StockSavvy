@@ -20,14 +20,15 @@ const RecommendationPage = () => {
 
     const location = useLocation();
     const previousState = location.state;
-    const previousUserInput = previousState && previousState.recommendation ? previousState.recommendation : '';
+    // trim whitespace
+    const previousUserInput = previousState && previousState.recommendation.trim() ? previousState.recommendation : '';
 
     const [recommendations, setRecommendations] = useState([]);
 
     const navigateToRecommendation = () => {
         const sector = document.querySelector('select').value;
         const idx = industries.indexOf(sector);
-        axios.get(`http://127.0.0.1:5000/api/recommendations/${idx}/3`)
+        axios.post(`http://127.0.0.1:5000/api/recommendations/${idx}/3`, { text: userInput })
         .then(response => {
             setRecommendations(response.data);
         }).catch(error => {
@@ -43,7 +44,7 @@ const RecommendationPage = () => {
                 <h1>Recommendations</h1>
                 {/* Place holders for filters */}
                 <div className="filter-group">
-                    <label>Choose Sector(s)</label>
+                    <label>Choose Sector Bias</label>
                     <select label='industrySelector'>
                         {industries.map((industry, index) => (
                             <option key={index} value={industry}>{industry}</option>
@@ -52,8 +53,8 @@ const RecommendationPage = () => {
                 </div>
             </div>
             <div className="input-text">
-                <label>Enter criteria for recommendation</label>
-                <textarea rows="4" placeholder="Your text here ..." defaultValue={userInput}></textarea>
+                <label>Recommendation Prompt</label>
+                <textarea rows="4" placeholder="Recommend stocks similar to [stock_name]..." defaultValue={userInput} onChange={(e) => setUserInput(e.target.value)} onKeyDown={(e) => {if (e.key === 'Enter') navigateToRecommendation()}}></textarea>
             </div>
             <div>
                 <Button variant="contained" sx={{ fontSize: '16px', fontWeight: 'bold', backgroundColor: '#2362a5', color: '#fff', padding: '10px 20px', borderRadius: '5px', '&:hover': { backgroundColor: '#0056b3' } }} onClick={navigateToRecommendation}>
