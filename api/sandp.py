@@ -14,6 +14,9 @@ class SandP500():
     def symbols(self) -> list:
         return list(self.data.index)
     
+    def extract_tickers(self, text):
+        return [ticker for ticker in self.symbols() if ticker in text.split()]
+    
 if __name__ == '__main__':
     sp500 = SandP500()
     print(sp500.get_data().head())

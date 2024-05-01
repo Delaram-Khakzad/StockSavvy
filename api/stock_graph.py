@@ -62,6 +62,7 @@ def plot_stock_price(symbol):
 
     img = io.BytesIO()
     plt.savefig(img, format='png')
+    plt.close()
     img.seek(0)
     return send_file(img, mimetype='image/png')
 

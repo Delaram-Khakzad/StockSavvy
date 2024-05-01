@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 from bs4 import BeautifulSoup
 import random
+import time
 
 def get_top_trending_stocks():
     url = 'https://finance.yahoo.com/most-active'
@@ -17,7 +18,8 @@ def get_top_trending_stocks():
     for row in rows:
         symbol = row.find('td', {'aria-label': 'Symbol'}).text.strip()
         top_stocks.append(symbol)
-    
+    # seed by the current 10 minute interval
+    random.seed(time.time() // 600)
     return random.sample(top_stocks, 3)  # Randomly pick 3 stocks from the top 10
 
 
