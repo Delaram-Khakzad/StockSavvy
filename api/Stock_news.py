@@ -28,6 +28,8 @@ def fetch_and_rerank_news(stock):
     try:
         response = requests.get(url)
         data = response.json()
+        if 'code' in data and data['code'] == 'rateLimited':
+            return jsonify([{'score': 10, 'title': 'oops, our API key was rate limited. Please try again later.', 'url': ''}])
         articles = data.get('articles', [])
         for article in articles:
             articles_list.append((article['title'], article['url']))
