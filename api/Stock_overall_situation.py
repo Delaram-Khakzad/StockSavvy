@@ -5,7 +5,7 @@ import openai
 from functools import cache
 
 # Hardcoding the OpenAI API key (not recommended for production)
-openai.api_key = 'sk-proj-2SsYcZ67svKuBHqIA3dgT3BlbkFJUjVGIv1CUVe7owKOzXAd'
+
 
 @cache
 def summarize_recommendations(symbol):
